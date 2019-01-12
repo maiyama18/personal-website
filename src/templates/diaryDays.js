@@ -1,25 +1,27 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 import Layout from '../components/layout';
 
-
-export default ({ data }) => (
+export default ({ data, pageContext }) => (
     <Layout>
-        <h2>Diary</h2>
         {data.allContentfulDiary.edges.map(edge => (
             <div key={edge.node.id}>
                 {edge.node.date}
                 <div dangerouslySetInnerHTML={{ __html: edge.node.content.childMarkdownRemark.html}}/>
             </div>
         ))}
+
+        {pageContext.newerPath ? <Link to={pageContext.newerPath}>newer</Link> : null}
+        {pageContext.olderPath ? <Link to={pageContext.olderPath}>older</Link> : null}
     </Layout>
 );
 
 export const query = graphql`
-  query {
+  query($skip: Int!, $limit: Int!) {
 	allContentfulDiary(
-      limit: 10,
-      sort: { fields: [date], order: DESC }
+      sort: { fields: [date], order: DESC },
+      limit: $limit,
+      skip: $skip,
     ) {
       edges {
         node {

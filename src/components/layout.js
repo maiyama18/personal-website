@@ -24,15 +24,4 @@ export default ({ children }) => (
             );
         }}
     />
-)
-;
-
-export const query = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`;
+);
