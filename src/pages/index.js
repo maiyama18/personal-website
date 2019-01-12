@@ -1,9 +1,8 @@
 import React from 'react';
-import Header from '../components/header';
+import Layout from '../components/layout';
 
 const Index = () => (
-    <div>
-        <Header/>
+    <Layout>
         <h2>Profile</h2>
         <ul>
             <li>M. Y.</li>
@@ -16,7 +15,7 @@ const Index = () => (
             <li>website2</li>
             <li>website3</li>
         </ul>
-    </div>
+    </Layout>
 );
 
 export default Index;
