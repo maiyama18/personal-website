@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { Container, Menu } from 'semantic-ui-react';
+import { Container, Menu, Image } from 'semantic-ui-react';
 
-export default ({ title }) => (
+export default ({ title, iconUrl }) => (
     <Menu attached inverted borderless size={'huge'} color={'grey'} style={{ marginBottom: '1rem' }}>
         <Container>
-            <Menu.Item>
+            <Menu.Item fitted={'horizontally'}>
+                <Image avatar src={iconUrl}/>
                 <Link to="/">{title}</Link>
             </Menu.Item>
 
