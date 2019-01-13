@@ -3,10 +3,10 @@ import { Link } from 'gatsby';
 import { Container, Menu, Image } from 'semantic-ui-react';
 
 export default ({ title, iconUrl }) => (
-    <Menu attached inverted borderless size={'huge'} color={'grey'} style={{ marginBottom: '1rem' }}>
+    <Menu attached inverted borderless size={'huge'} style={{ marginBottom: '1rem' }}>
         <Container>
             <Menu.Item fitted={'horizontally'}>
-                <Image avatar src={iconUrl}/>
+                {/*<Image avatar src={iconUrl}/>*/}
                 <Link to="/">{title}</Link>
             </Menu.Item>
 

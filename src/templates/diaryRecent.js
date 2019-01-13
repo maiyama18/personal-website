@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
 import Layout from '../components/layout';
+import BacknumberLinks from '../components/backnumberLinks';
+import DiaryDays from '../components/diaryDays';
 
 export default ({ data, pageContext }) => (
     <Layout>
-        {data.allContentfulDiary.edges.map(edge => (
-            <div key={edge.node.id}>
-                {edge.node.date}
-                <div dangerouslySetInnerHTML={{ __html: edge.node.content.childMarkdownRemark.html}}/>
-            </div>
-        ))}
+        <DiaryDays edges={data.allContentfulDiary.edges}/>
 
-        {pageContext.newerPath ? <Link to={pageContext.newerPath}>newer</Link> : null}
-        {pageContext.olderPath ? <Link to={pageContext.olderPath}>older</Link> : null}
+        {pageContext.newerPath ? <Link to={pageContext.newerPath}><h4 style={{ display: 'inline' }}>{'<-newer'}</h4></Link> : null}
+        {pageContext.newerPath && pageContext.olderPath ? <h4 style={{ display: 'inline' }}>{' / '}</h4> : null}
+        {pageContext.olderPath ? <Link to={pageContext.olderPath}><h4 style={{ display: 'inline' }}>{'older->'}</h4></Link> : null}
+
+        <BacknumberLinks monthsByYears={pageContext.monthsByYears}/>
     </Layout>
 );
 
@@ -26,7 +26,7 @@ export const query = graphql`
       edges {
         node {
           id
-          date
+          date(formatString: "YYYYMMDD")
           content {
             childMarkdownRemark {
               html

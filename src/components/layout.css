@@ -1,0 +1,68 @@
+html {
+  font-size: 14px;
+}
+
+body {
+  overflow-y: scroll;
+
+  color: #525252;
+
+  font-family: 'M PLUS Rounded 1c';
+  font-weight: lighter;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.4;
+  margin: 0 0 0.2rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'M PLUS Rounded 1c';
+  font-weight: normal;
+  margin: 0 0 0.8rem;
+}
+
+a {
+  color: darkorange;
+}
+
+ul {
+  margin-top: 0.5rem;
+}
+
+li {
+  margin-bottom: 0.3rem;
+}
+
+img {
+  max-width: 600px;
+}
+
+pre {
+  background-color: #444444;
+  padding: 0.5rem;
+}
+
+code {
+  background-color: #444444;
+  color: #eeeeee;
+  border-radius: 3px;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 200;
+  font-size: 0.85rem;
+  padding: 0 0.3rem;
+}
+code:before,
+code:after {
+  letter-spacing: -0.2rem;
+  content: " ";
+}
+
+pre code {
+  padding: 0;
+}
+pre code:before,
+pre code:after {
+  content: "";
+}

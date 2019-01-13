@@ -2,6 +2,7 @@ import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import { Container } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
+import './layout.css';
 import Header from './header';
 
 export default ({ children }) => (

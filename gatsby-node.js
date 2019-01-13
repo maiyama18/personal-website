@@ -17,6 +17,59 @@ exports.createPages = async ({ graphql, actions }) => {
     `);
 
     const { edges } = result.data.allContentfulDiary;
+
+    // create month pages
+    const monthAndYearArray = edges.map(({ node }) => {
+        const m = moment(node.date);
+        return {
+            year: m.year().toString().padStart(4, '0'),
+            month: (m.month() + 1).toString().padStart(2, '0'),
+        }
+    });
+    const years = [...new Set(monthAndYearArray.map(my => my.year))];
+    const monthAndYears = monthAndYearArray.filter((monthAndYear, i, monthAndYearArray) => (
+        monthAndYearArray.findIndex(my => my.year === monthAndYear.year && my.month === monthAndYear.month) === i
+    )).sort((a, b) => {
+        if (a.year !== b.year) return a.year - b.year;
+        else return a.month - b.month;
+    });
+    console.log(monthAndYears)
+    const monthsByYears = years.reduce((hash, year) => {
+        const months = monthAndYears.filter(my => my.year === year).map(my => my.month);
+        return {
+            ...hash,
+            [year]: months,
+        }
+    }, {});
+
+    for (let i = 0; i < monthAndYears.length; i++) {
+        const { month, year } = monthAndYears[i];
+
+        const dateGlob = `${year}-${month}-*`;
+
+        const prevMonthAndYear = (i === 0) ? null : monthAndYears[i-1];
+        const nextMonthAndYear = (i === monthAndYears.length - 1) ? null : monthAndYears[i+1];
+
+        const prevPath = (prevMonthAndYear == null)
+            ? null
+            : `/diary/month/${prevMonthAndYear.year}${prevMonthAndYear.month}`;
+        const nextPath = (nextMonthAndYear == null)
+            ? null
+            : `/diary/month/${nextMonthAndYear.year}${nextMonthAndYear.month}`;
+
+        createPage({
+            path: `/diary/month/${year}${month}`,
+            component: path.resolve('./src/templates/diaryMonth.js'),
+            context: {
+                dateGlob,
+                prevPath,
+                nextPath,
+                monthAndYears,
+                monthsByYears,
+            }
+        })
+    }
+
     // create day pages
     edges.forEach(({ node }) => {
         const { date } = node;
@@ -26,6 +79,7 @@ exports.createPages = async ({ graphql, actions }) => {
             component: path.resolve('./src/templates/diaryDay.js'),
             context: {
                 date,
+                monthsByYears,
             }
         })
     });
@@ -50,44 +104,8 @@ exports.createPages = async ({ graphql, actions }) => {
                 skip: i * daysPerPage,
                 newerPath,
                 olderPath,
-            }
-        })
-    }
-
-    // create month pages
-    const monthAndYearArray = edges.map(({ node }) => {
-        const m = moment(node.date);
-        return {
-            year: m.year().toString().padStart(4, '0'),
-            month: (m.month() + 1).toString().padStart(2, '0'),
-        }
-    });
-    const monthAndYears = monthAndYearArray.filter((monthAndYear, i, monthAndYearArray) => (
-        monthAndYearArray.findIndex(my => my.year === monthAndYear.year && my.month === monthAndYear.month) === i
-    ));
-
-    for (let i = 0; i < monthAndYears.length; i++) {
-        const { month, year } = monthAndYears[i];
-
-        const dateGlob = `${year}-${month}-*`;
-
-        const prevMonthAndYear = (i === 0) ? null : monthAndYears[i-1];
-        const nextMonthAndYear = (i === monthAndYears.length - 1) ? null : monthAndYears[i+1];
-
-        const prevPath = (prevMonthAndYear == null)
-            ? null
-            : `/diary/month/${prevMonthAndYear.year}${prevMonthAndYear.month}`;
-        const nextPath = (nextMonthAndYear == null)
-            ? null
-            : `/diary/month/${nextMonthAndYear.year}${nextMonthAndYear.month}`;
-
-        createPage({
-            path: `/diary/month/${year}${month}`,
-            component: path.resolve('./src/templates/diaryMonth.js'),
-            context: {
-                dateGlob,
-                prevPath,
-                nextPath,
+                monthAndYears,
+                monthsByYears,
             }
         })
     }

@@ -14,6 +14,16 @@ module.exports = {
                 accessToken: CONTENTFUL_ACCESS_TOKEN,
             }
         },
-        'gatsby-transformer-remark'
+        'gatsby-transformer-remark',
+        {
+            resolve: 'gatsby-plugin-google-fonts',
+            options: {
+                fonts: [
+                    'M PLUS Rounded 1c\:light,regular',
+                    'Source Code Pro\:light',
+                    'Satisfy'
+                ]
+            }
+        },
     ]
 };

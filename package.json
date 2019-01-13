@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "gatsby": "^2.0.76",
+    "gatsby-plugin-google-fonts": "^0.0.4",
     "gatsby-source-contentful": "^2.0.26",
     "gatsby-source-filesystem": "^2.0.16",
     "gatsby-transformer-remark": "^2.2.0",
