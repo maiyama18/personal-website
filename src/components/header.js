@@ -12,7 +12,7 @@ export default ({ title, iconUrl }) => (
 
             <Menu.Menu position={'right'}>
                 <Menu.Item>
-                    <Link to="/">home</Link>
+                    <Link to="/blog">blog</Link>
                 </Menu.Item>
                 <Menu.Item>
                     <Link to="/diary">diary</Link>
@@ -22,4 +22,3 @@ export default ({ title, iconUrl }) => (
         </Container>
     </Menu>
 );
-

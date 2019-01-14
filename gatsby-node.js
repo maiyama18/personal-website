@@ -130,7 +130,7 @@ const createBlogPages = (blogEdges, createPage) => {
     blogIds.forEach(id => {
         createPage({
             path: `/blog/${id}`,
-            component: path.resolve('./src/templates/blog/blog.js'),
+            component: path.resolve('./src/templates/blog/post.js'),
             context: {
                 id,
             }
