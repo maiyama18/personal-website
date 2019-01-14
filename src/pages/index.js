@@ -27,15 +27,17 @@ export default ({ data }) => (
         <h2 style={{ marginBottom: '1.5rem' }}>Websites</h2>
         <Card.Group itemsPerRow={'4'} stackable>
             {data.allContentfulWebsite.edges.map(({ node }) => (
-                <Card>
+                <Card key={node.id}>
                     <Image src={node.image.file.url}/>
                     <Card.Content>
-                        <Card.Header>{node.name}</Card.Header>
+                        <Card.Header>
+                            <a href={node.url}>{node.name}</a>
+                        </Card.Header>
                         <Card.Description>{node.description}</Card.Description>
                     </Card.Content>
 
                     <Card.Content extra>
-                        {node.technologies.map(({ content }) => <Label size={'tiny'}>{content}</Label>)}
+                        {node.technologies.map(({ content }) => <Label key={content} size={'tiny'}>{content}</Label>)}
                     </Card.Content>
                 </Card>
             ))}
@@ -90,6 +92,7 @@ export const query = graphql`
     allContentfulWebsite {
       edges {
         node {
+          id
           name
           url
           description
