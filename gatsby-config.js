@@ -36,9 +36,7 @@ module.exports = {
             options: {
                 feeds: [
                     {
-                        title: diaryTitle,
-                        output: '/diary/rss.xml',
-                        serialize: ({ query: { site, allContentfulDiary } }) => {
+                        serialize: ({ query: { allContentfulDiary } }) => {
                             return allContentfulDiary.edges.map(({ node }) => {
                                 const formattedDate = node.date.replace(/-/g, '');
                                 return {
@@ -51,6 +49,11 @@ module.exports = {
                             })
                         },
                         query: `{
+                          site {
+                            siteMetadata {
+                              siteUrl
+                            }
+                          }
                           allContentfulDiary(
                             limit: 1000,
                             sort: { fields: [date], order: DESC },
@@ -68,11 +71,11 @@ module.exports = {
                           }
                         }
                         `,
+                        title: diaryTitle,
+                        output: '/diary/rss.xml',
                     },
                     {
-                        title: blogTitle,
-                        output: '/blog/rss.xml',
-                        serialize: ({ query: { site, allContentfulBlog } }) => {
+                        serialize: ({ query: { allContentfulBlog } }) => {
                             return allContentfulBlog.edges.map(({ node }) => {
                                 return {
                                     url: `${siteUrl}/blog/${node.id}`,
@@ -84,6 +87,11 @@ module.exports = {
                             })
                         },
                         query: `{
+                          site {
+                            siteMetadata {
+                              siteUrl
+                            }
+                          }
                           allContentfulBlog(
                            limit: 1000,
                            sort: { fields: [postedAt], order: DESC }
@@ -103,6 +111,8 @@ module.exports = {
                           }
                         }
                         `,
+                        title: blogTitle,
+                        output: '/blog/rss.xml',
                     },
                 ]
             }
