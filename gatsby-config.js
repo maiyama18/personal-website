@@ -25,5 +25,43 @@ module.exports = {
                 ]
             }
         },
+        {
+            title: "muiscript's blog",
+            output: '/rss.xml',
+            resolve: 'gatsby-plugin-feed',
+            feeds: [
+                {
+                    serialize: ({ query: { site, allContentfulDiary } }) => {
+                        return allContentfulDiary.edges.map(({ node }) => {
+                            return {
+                                url: `${site.siteMetadata.siteUrl}/diary/${node.date}`,
+                            }
+                        })
+                    },
+                    query: `{
+                      site {
+                        siteMetadata {
+                          siteUrl
+                        }
+                      }
+                      allContentfulDiary(
+                        limit: 1000,
+                        sort: {fields: [date], order: DESC},
+                      ){
+                        edges {
+                          node {
+                            date(formatString: "YYYYMMDD")
+                            content {
+                              childMarkdownRemark {
+                                html
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }`,
+                }
+            ]
+        },
     ]
 };
