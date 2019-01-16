@@ -26,31 +26,24 @@ module.exports = {
             }
         },
         {
-            title: "muiscript's blog",
-            output: '/rss.xml',
             resolve: 'gatsby-plugin-feed',
-            feeds: [
-                {
-                    serialize: ({ query: { site, allContentfulDiary } }) => {
-                        return allContentfulDiary.edges.map(({ node }) => {
-                            return {
-                                url: `${site.siteMetadata.siteUrl}/diary/${node.date}`,
-                            }
-                        })
-                    },
-                    query: `{
-                      site {
-                        siteMetadata {
-                          siteUrl
-                        }
-                      }
-                      allContentfulDiary(
-                        limit: 1000,
-                        sort: {fields: [date], order: DESC},
-                      ){
+            options: {
+                feeds: [
+                    {
+                        title: 'title',
+                        output: '/rss.xml',
+                        serialize: ({ query: { site, allContentfulDiary } }) => {
+                            return allContentfulDiary.edges.map(({ node }) => {
+                                return {
+                                    url: `${site.siteMetadata.siteUrl}/diary/${node.date}`,
+                                }
+                            })
+                        },
+                        query: `{
+                      allContentfulDiary {
                         edges {
                           node {
-                            date(formatString: "YYYYMMDD")
+                            date
                             content {
                               childMarkdownRemark {
                                 html
@@ -60,8 +53,9 @@ module.exports = {
                         }
                       }
                     }`,
-                }
-            ]
+                    }
+                ]
+            }
         },
     ]
 };
