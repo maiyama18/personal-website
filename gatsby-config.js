@@ -1,10 +1,16 @@
 const { CONTENTFUL_SPACE_ID, CONTENTFUL_ACCESS_TOKEN } = process.env;
 
+const siteTitle = 'muiscript';
+const diaryTitle = 'unrelieved';
+const blogTitle = 'unresolved';
+
+const siteUrl = "https://muiscript.tokyo";
+
 module.exports = {
     siteMetadata: {
-        title: 'my website',
-        description: 'my profile and diary',
-        siteUrl: 'https://muiscript.netlify.com',
+        title: siteTitle,
+        description: 'cv / diary / blog',
+        siteUrl,
     },
     plugins: [
         {
@@ -30,14 +36,14 @@ module.exports = {
             options: {
                 feeds: [
                     {
-                        title: "muiscript's diary",
+                        title: diaryTitle,
                         output: '/diary/rss.xml',
                         serialize: ({ query: { site, allContentfulDiary } }) => {
                             return allContentfulDiary.edges.map(({ node }) => {
                                 const formattedDate = node.date.replace(/-/g, '');
                                 return {
-                                    url: `${site.siteMetadata.siteUrl}/diary/${formattedDate}`,
-                                    guid: `${site.siteMetadata.siteUrl}/diary/${formattedDate}`,
+                                    url: `${siteUrl}/diary/${formattedDate}`,
+                                    guid: `${siteUrl}/diary/${formattedDate}`,
                                     date: node.date,
                                     title: formattedDate,
                                     description: node.content.childMarkdownRemark.html,
@@ -45,12 +51,6 @@ module.exports = {
                             })
                         },
                         query: `{
-                          site {
-                            siteMetadata {
-                              title
-                              siteUrl
-                            }
-                          }
                           allContentfulDiary(
                             limit: 1000,
                             sort: { fields: [date], order: DESC },
@@ -70,13 +70,13 @@ module.exports = {
                         `,
                     },
                     {
-                        title: "muiscript's blog",
+                        title: blogTitle,
                         output: '/blog/rss.xml',
                         serialize: ({ query: { site, allContentfulBlog } }) => {
                             return allContentfulBlog.edges.map(({ node }) => {
                                 return {
-                                    url: `${site.siteMetadata.siteUrl}/blog/${node.id}`,
-                                    guid: `${site.siteMetadata.siteUrl}/blog/${node.id}`,
+                                    url: `${siteUrl}/blog/${node.id}`,
+                                    guid: `${siteUrl}/blog/${node.id}`,
                                     date: node.postedAt,
                                     title: node.title,
                                     description: node.body.childMarkdownRemark.html,
@@ -84,12 +84,6 @@ module.exports = {
                             })
                         },
                         query: `{
-                          site {
-                            siteMetadata {
-                              title
-                              siteUrl
-                            }
-                          }
                           allContentfulBlog(
                            limit: 1000,
                            sort: { fields: [postedAt], order: DESC }
