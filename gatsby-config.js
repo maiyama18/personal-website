@@ -32,6 +32,15 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-feed',
             options: {
+                query: `{
+                  site {
+                    siteMetadata {
+                      siteUrl
+                      title
+                      description
+                    }
+                  }
+                }`,
                 feeds: [
                     {
                         output: '/diary/rss.xml',
@@ -51,6 +60,8 @@ module.exports = {
                           site {
                             siteMetadata {
                               siteUrl
+                              title
+                              description
                             }
                           }
                           allContentfulDiary(
@@ -72,6 +83,7 @@ module.exports = {
                         `,
                     },
                     {
+                        title: 'mui blog',
                         output: '/blog/rss.xml',
                         serialize: ({ query: { site, allContentfulBlog } }) => {
                             return allContentfulBlog.edges.map(({ node }) => {
@@ -88,6 +100,8 @@ module.exports = {
                           site {
                             siteMetadata {
                               siteUrl
+                              title
+                              description
                             }
                           }
                           allContentfulBlog(
