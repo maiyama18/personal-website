@@ -9,7 +9,7 @@ export default ({ data }) => (
             title={`${data.contentfulDiary.date} | ${data.site.siteMetadata.title}`}
             description={data.contentfulDiary.content.content}
             pageUrl={`${data.site.siteMetadata.siteUrl}/diary/${data.contentfulDiary.date}`}
-            imageUrl={data.contentfulAsset.file.url}
+            imageUrl={`https:${data.contentfulAsset.file.url}`}
         />
         <Layout>
             <h4>{data.contentfulDiary.date}</h4>

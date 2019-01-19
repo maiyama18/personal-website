@@ -9,7 +9,7 @@ export default ({ data }) => (
             title={`${data.contentfulBlog.title} | ${data.site.siteMetadata.title}`}
             description={data.contentfulBlog.body.body}
             pageUrl={`${data.site.siteMetadata.siteUrl}/blog/${data.contentfulBlog.id}`}
-            imageUrl={data.contentfulAsset.file.url}
+            imageUrl={`https:${data.contentfulAsset.file.url}`}
         />
         <Layout>
             <h4 style={{ fontFamily: 'Source Code Pro', color: 'darkorange' }}>{data.contentfulBlog.postedAt}</h4>

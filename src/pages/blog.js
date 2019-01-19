@@ -9,7 +9,7 @@ export default ({ data }) => (
             title={`${data.site.siteMetadata.title} blog`}
             description={data.site.siteMetadata.description}
             pageUrl={`${data.site.siteMetadata.siteUrl}/blog`}
-            imageUrl={data.contentfulAsset.file.url}
+            imageUrl={`https:${data.contentfulAsset.file.url}`}
         />
         <Layout>
             {data.allContentfulBlog.edges.map(({ node }) => (

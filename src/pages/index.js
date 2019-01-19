@@ -10,7 +10,7 @@ export default ({ data }) => (
             title={data.site.siteMetadata.title}
             description={data.site.siteMetadata.description}
             pageUrl={data.site.siteMetadata.siteUrl}
-            imageUrl={data.contentfulAsset.file.url}
+            imageUrl={`https:${data.contentfulAsset.file.url}`}
         />
         <Layout>
             <h2>Profile</h2>

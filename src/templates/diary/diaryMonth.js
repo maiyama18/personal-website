@@ -11,7 +11,7 @@ export default ({ data, pageContext }) => (
             title={`${pageContext.monthStr} | ${data.site.siteMetadata.title}`}
             description={data.site.siteMetadata.description}
             pageUrl={`${data.site.siteMetadata.siteUrl}/diary/${pageContext.monthStr}`}
-            imageUrl={data.contentfulAsset.file.url}
+            imageUrl={`https:${data.contentfulAsset.file.url}`}
         />
         <Layout>
             <DiaryDays edges={data.allContentfulDiary.edges}/>
