@@ -97,7 +97,7 @@ const createDiaryPages = (diaryEdges, createPage) => {
     });
 
     // create recent pages
-    const daysPerPage = 3;
+    const daysPerPage = 15;
     const numRecentPages = Math.ceil(diaryEdges.length / daysPerPage);
     for (let i = 0; i < numRecentPages; i++) {
         const currentPath = (i === 0) ? '/diary' : `/diary/recent/${i + 1}`;

@@ -1,15 +1,13 @@
 const { CONTENTFUL_SPACE_ID, CONTENTFUL_ACCESS_TOKEN } = process.env;
 
-const siteTitle = 'muiscript';
-const diaryTitle = 'unrelieved';
-const blogTitle = 'unresolved';
-
+const siteTitle = 'mui';
+const siteDescription = 'unrelieved/unresolved'
 const siteUrl = "https://muiscript.tokyo";
 
 module.exports = {
     siteMetadata: {
         title: siteTitle,
-        description: 'cv / diary / blog',
+        description: siteDescription,
         siteUrl,
     },
     plugins: [
@@ -34,14 +32,24 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-feed',
             options: {
+                query: `{
+                  site {
+                    siteMetadata {
+                      siteUrl
+                      title
+                      description
+                    }
+                  }
+                }`,
                 feeds: [
                     {
-                        serialize: ({ query: { allContentfulDiary } }) => {
+                        output: '/diary/rss.xml',
+                        serialize: ({ query: { site, allContentfulDiary } }) => {
                             return allContentfulDiary.edges.map(({ node }) => {
                                 const formattedDate = node.date.replace(/-/g, '');
                                 return {
-                                    url: `${siteUrl}/diary/${formattedDate}`,
-                                    guid: `${siteUrl}/diary/${formattedDate}`,
+                                    url: `${site.siteMetadata.siteUrl}/diary/${formattedDate}`,
+                                    guid: `${site.siteMetadata.siteUrl}/diary/${formattedDate}`,
                                     date: node.date,
                                     title: formattedDate,
                                     description: node.content.childMarkdownRemark.html,
@@ -52,6 +60,8 @@ module.exports = {
                           site {
                             siteMetadata {
                               siteUrl
+                              title
+                              description
                             }
                           }
                           allContentfulDiary(
@@ -71,15 +81,15 @@ module.exports = {
                           }
                         }
                         `,
-                        title: diaryTitle,
-                        output: '/diary/rss.xml',
                     },
                     {
-                        serialize: ({ query: { allContentfulBlog } }) => {
+                        title: 'mui blog',
+                        output: '/blog/rss.xml',
+                        serialize: ({ query: { site, allContentfulBlog } }) => {
                             return allContentfulBlog.edges.map(({ node }) => {
                                 return {
-                                    url: `${siteUrl}/blog/${node.id}`,
-                                    guid: `${siteUrl}/blog/${node.id}`,
+                                    url: `${site.siteMetadata.siteUrl}/blog/${node.id}`,
+                                    guid: `${site.siteMetadata.siteUrl}/blog/${node.id}`,
                                     date: node.postedAt,
                                     title: node.title,
                                     description: node.body.childMarkdownRemark.html,
@@ -90,6 +100,8 @@ module.exports = {
                           site {
                             siteMetadata {
                               siteUrl
+                              title
+                              description
                             }
                           }
                           allContentfulBlog(
@@ -111,8 +123,6 @@ module.exports = {
                           }
                         }
                         `,
-                        title: blogTitle,
-                        output: '/blog/rss.xml',
                     },
                 ]
             }
