@@ -1,7 +1,7 @@
 const { CONTENTFUL_SPACE_ID, CONTENTFUL_ACCESS_TOKEN } = process.env;
 
 const siteTitle = 'mui';
-const siteDescription = 'unrelieved/unresolved'
+const siteDescription = 'about @muiscript'
 const siteUrl = "https://muiscript.tokyo";
 
 module.exports = {

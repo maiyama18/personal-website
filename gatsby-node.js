@@ -78,6 +78,7 @@ const createDiaryPages = (diaryEdges, createPage) => {
                 nextPath,
                 monthAndYears,
                 monthsByYears,
+                monthStr: `${year}${month}`,
             }
         })
     }
