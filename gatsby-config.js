@@ -19,16 +19,16 @@ module.exports = {
             }
         },
         'gatsby-transformer-remark',
-        // {
-        //     resolve: 'gatsby-plugin-google-fonts',
-        //     options: {
-        //         fonts: [
-        //             'M PLUS Rounded 1c\:light,regular',
-        //             'Source Code Pro\:light',
-        //             'Satisfy'
-        //         ]
-        //     }
-        // },
+        {
+            resolve: 'gatsby-plugin-google-fonts',
+            options: {
+                fonts: [
+                    'M PLUS Rounded 1c\:light,regular',
+                    'Source Code Pro\:light',
+                    'Satisfy'
+                ]
+            }
+        },
         'gatsby-plugin-react-helmet',
         {
             resolve: 'gatsby-plugin-feed',
