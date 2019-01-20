@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Card, Image, Label } from 'semantic-ui-react';
+// import { Card, Image, Label } from 'semantic-ui-react';
 import Layout from '../components/layout';
 import Head from '../components/head';
 
@@ -34,23 +34,23 @@ export default ({ data }) => (
             </ul>
 
             <h2 style={{ marginBottom: '1.5rem' }}>Websites</h2>
-            <Card.Group itemsPerRow={'4'} stackable>
+            <div itemsPerRow={'4'} stackable>
                 {data.allContentfulWebsite.edges.map(({ node }) => (
-                    <Card key={node.id}>
-                        <Image src={node.image.file.url}/>
-                        <Card.Content>
-                            <Card.Header>
+                    <div key={node.id}>
+                        <image src={node.image.file.url}/>
+                        <div>
+                            <div>
                                 <a href={node.url}>{node.name}</a>
-                            </Card.Header>
-                            <Card.Description>{node.description}</Card.Description>
-                        </Card.Content>
+                            </div>
+                            <div>{node.description}</div>
+                        </div>
 
-                        <Card.Content extra>
-                            {node.technologies.map(({ content }) => <Label key={content} size={'tiny'}>{content}</Label>)}
-                        </Card.Content>
-                    </Card>
+                        <div>
+                            {node.technologies.map(({ content }) => <span key={content} size={'tiny'}>{content}</span>)}
+                        </div>
+                    </div>
                 ))}
-            </Card.Group>
+            </div>
 
             <h2 style={{ marginTop: '1.5rem' }}>Codes</h2>
             <ul>

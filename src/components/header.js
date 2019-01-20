@@ -1,24 +1,47 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { Container, Menu, Image } from 'semantic-ui-react';
+// import { Container, Menu, Image } from 'semantic-ui-react';
+
+const linkStyle = {
+    color: 'inherit',
+    textDecoration: 'none',
+}
 
 export default ({ title, iconUrl }) => (
-    <Menu attached inverted borderless size={'huge'} color={'grey'} style={{ marginBottom: '1rem' }}>
-        <Container>
-            <Menu.Item fitted={'horizontally'}>
-                {/*<Image avatar src={iconUrl}/>*/}
-                <Link to="/">{title}</Link>
-            </Menu.Item>
-
-            <Menu.Menu position={'right'}>
-                <Menu.Item>
-                    <Link to="/blog">blog</Link>
-                </Menu.Item>
-                <Menu.Item>
-                    <Link to="/diary">diary</Link>
-                </Menu.Item>
-            </Menu.Menu>
-
-        </Container>
-    </Menu>
+    <div>
+        <h1 style={{ margin: 0 }}>
+            <Link
+                to="/"
+                style={{
+                    ...linkStyle,
+                    fontSize: '2.5rem',
+                }}
+            >
+                <img
+                    src={iconUrl}
+                    alt={'icon'}
+                    style={{
+                        width: '2rem',
+                        height: '2rem',
+                        borderRadius: '50%',
+                        marginRight: '0.3rem',
+                    }}
+                />
+                {title}
+            </Link>
+        </h1>
+        <p style={{ margin: '0 0 1rem' }}>
+            <Link to="/" style={linkStyle}>
+                about
+            </Link>
+            {' '} | {' '}
+            <Link to="/blog" style={linkStyle}>
+                blog
+            </Link>
+            {' '} | {' '}
+            <Link to="/diary" style={linkStyle}>
+                diary
+            </Link>
+        </p>
+    </div>
 );

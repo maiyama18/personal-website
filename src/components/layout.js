@@ -1,7 +1,5 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import { Container } from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
 import './layout.css';
 import Header from './header';
 
@@ -25,11 +23,11 @@ export default ({ children }) => (
             const { title } = data.site.siteMetadata;
             const iconUrl = data.contentfulAsset.file.url;
             return (
-                <div>
+                <div className={'container'}>
                     <Header title={title} iconUrl={iconUrl}/>
-                    <Container>
+                    <div>
                         {children}
-                    </Container>
+                    </div>
                 </div>
             );
         }}

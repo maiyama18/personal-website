@@ -11,6 +11,7 @@ module.exports = {
         siteUrl,
     },
     plugins: [
+        'gatsby-plugin-offline',
         {
             resolve: 'gatsby-source-contentful',
             options: {
@@ -23,9 +24,8 @@ module.exports = {
             resolve: 'gatsby-plugin-google-fonts',
             options: {
                 fonts: [
-                    'M PLUS Rounded 1c\:light,regular',
-                    'Source Code Pro\:light',
-                    'Satisfy'
+                    'M PLUS Rounded 1c\:regular',
+                    'Source Code Pro\:regular',
                 ]
             }
         },
