@@ -33,26 +33,44 @@ export default ({ data }) => (
                 <li>npm: <a href={'https://npm.com/yam-net'}>yam-net</a></li>
             </ul>
 
-            <h2 style={{ marginBottom: '1.5rem' }}>Websites</h2>
-            <div itemsPerRow={'4'} stackable>
+            <h2>Websites</h2>
+            <div>
                 {data.allContentfulWebsite.edges.map(({ node }) => (
-                    <div key={node.id}>
-                        <image src={node.image.file.url}/>
+                    <div key={node.id} style={{ marginBottom: '2rem', clear: 'left' }}>
+                        <div style={{ float: 'left' }}>
+                            <img src={node.image.file.url} style={{ width: '160px', height: '120px', border: '1px grey solid', marginRight: '0.6rem' }}/>
+                        </div>
                         <div>
-                            <div>
-                                <a href={node.url}>{node.name}</a>
-                            </div>
-                            <div>{node.description}</div>
+                            <h3>
+                                <a href={node.url} style={{ textDecoration: 'none' }}>{node.name}</a>
+                            </h3>
+                            <p>{node.description}</p>
+                            <p style={{ fontFamily: 'Source Code Pro' }}>{node.since}</p>
+                            <p>
+                                {node.technologies.map(({ content }) => (
+                                    <span
+                                        key={content}
+                                        style={{
+                                            background: '#a0a0a0',
+                                            color: 'white',
+                                            fontFamily: 'Source Code Pro',
+                                            fontSize: '0.8rem',
+                                            borderRadius: '0.3rem',
+                                            padding: '0.3rem',
+                                            marginRight: '0.3rem',
+                                        }}
+                                    >{content}</span>
+                                ))}
+                            </p>
                         </div>
 
                         <div>
-                            {node.technologies.map(({ content }) => <span key={content} size={'tiny'}>{content}</span>)}
                         </div>
                     </div>
                 ))}
             </div>
 
-            <h2 style={{ marginTop: '1.5rem' }}>Codes</h2>
+            <h2 style={{ paddingTop: '1.5rem', clear: 'left' }}>Codes</h2>
             <ul>
                 <li><a href={'https://github.com/muiscript/rb-monkey'}>rb-monkey</a>: Ruby implementation of <a
                     href={''}>Monkey
@@ -111,7 +129,7 @@ export const query = graphql`
         url
       }
     }
-    allContentfulWebsite {
+    allContentfulWebsite(sort: { fields: [confidence], order: DESC }) {
       edges {
         node {
           id
@@ -121,7 +139,7 @@ export const query = graphql`
           technologies {
             content
           }
-          since
+          since(formatString: "YYYY/MM-")
           image {
             file {
               url

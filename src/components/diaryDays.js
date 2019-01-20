@@ -9,7 +9,7 @@ export default ({ edges }) => (
                         {node.date}
                     </a>
                 </h2>
-                <div dangerouslySetInnerHTML={{ __html: node.content.childMarkdownRemark.html }}/>
+                <div className={'diary-post'} dangerouslySetInnerHTML={{ __html: node.content.childMarkdownRemark.html }}/>
             </div>
         ))}
     </div>

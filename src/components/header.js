@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 // import { Container, Menu, Image } from 'semantic-ui-react';
 
 const linkStyle = {
-    color: 'inherit',
     textDecoration: 'none',
 }
 
@@ -14,6 +13,7 @@ export default ({ title, iconUrl }) => (
                 to="/"
                 style={{
                     ...linkStyle,
+                    color: 'inherit',
                     fontSize: '2.5rem',
                 }}
             >

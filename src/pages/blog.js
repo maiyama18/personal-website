@@ -16,7 +16,7 @@ export default ({ data }) => (
                 <div key={node.id} style={{ marginBottom: '1.5rem' }}>
                     <h4 style={{ fontFamily: 'Source Code Pro', marginBottom: '0.3rem' }}>{node.postedAt}</h4>
                     <h3 style={{ marginTop: '0' }}>
-                        <a href={`/blog/${node.id}`}>{node.title}</a>
+                        <a href={`/blog/${node.id}`} style={{ textDecoration: 'none' }}>{node.title}</a>
                     </h3>
                 </div>
             ))}

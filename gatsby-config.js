@@ -24,7 +24,7 @@ module.exports = {
             resolve: 'gatsby-plugin-google-fonts',
             options: {
                 fonts: [
-                    'M PLUS Rounded 1c\:regular',
+                    'M PLUS Rounded 1c\:regular,bold',
                     'Source Code Pro\:regular',
                 ]
             }
