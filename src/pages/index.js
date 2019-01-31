@@ -33,6 +33,22 @@ export default ({ data }) => (
                 <li>npm: <a href={'https://npm.com/yam-net'}>yam-net</a></li>
             </ul>
 
+            <h2>Codes</h2>
+            <ul>
+                <li>
+                    <a href={'https://github.com/muiscript/ether'}>ether</a>:
+                        an original scripting language implemented from scratch
+                </li>
+                <li>
+                    <a href={'https://github.com/muiscript/rb-monkey'}>rb-monkey</a>:
+                        Ruby implementation of <a href={'https://interpreterbook.com/'}>Monkey programming language</a>
+                </li>
+                <li>
+                    <a href={'https://github.com/muiscript/cli-2048-java'}>cli-2048-java</a>:
+                        command line <a href={'https://play2048.co/'}>2048</a> written in Java
+                </li>
+            </ul>
+
             <h2>Websites</h2>
             <div>
                 {data.allContentfulWebsite.edges.map(({ node }) => (
@@ -70,17 +86,7 @@ export default ({ data }) => (
                 ))}
             </div>
 
-            <h2 style={{ paddingTop: '1.5rem', clear: 'left' }}>Codes</h2>
-            <ul>
-                <li><a href={'https://github.com/muiscript/rb-monkey'}>rb-monkey</a>: Ruby implementation of <a
-                    href={''}>Monkey
-                    programming language</a></li>
-                <li><a href={'https://github.com/muiscript/cli-2048-java'}>cli-2048-java</a>: command line <a
-                    href={'https://play2048.co/'}>2048</a> written in Java
-                </li>
-            </ul>
-
-            <h2>Writings</h2>
+            <h2 style={{ paddingTop: '1.5rem', clear: 'left' }}>Writings</h2>
             <h4>react.js/redux.js</h4>
             <ul>
                 <li><a
