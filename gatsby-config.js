@@ -1,6 +1,6 @@
 const { CONTENTFUL_SPACE_ID, CONTENTFUL_ACCESS_TOKEN } = process.env;
 
-const siteTitle = 'mui';
+const siteTitle = 'muiscript';
 const siteDescription = 'about @muiscript'
 const siteUrl = "https://muiscript.tokyo";
 
